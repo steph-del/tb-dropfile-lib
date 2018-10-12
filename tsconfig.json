@@ -15,6 +15,14 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "tb-dropfile-lib": [
+        "dist/tb-dropfile-lib"
+      ],
+      "tb-dropfile-lib/*": [
+        "dist/tb-dropfile-lib/*"
+      ]
+    }
   }
 }

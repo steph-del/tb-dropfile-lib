@@ -23,7 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -115,6 +115,46 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "tb-dropfile-lib": {
+      "root": "projects/tb-dropfile-lib",
+      "sourceRoot": "projects/tb-dropfile-lib/src",
+      "projectType": "library",
+      "prefix": "tb-dropfile",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/tb-dropfile-lib/tsconfig.lib.json",
+            "project": "projects/tb-dropfile-lib/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/tb-dropfile-lib/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/tb-dropfile-lib/src/test.ts",
+            "tsConfig": "projects/tb-dropfile-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/tb-dropfile-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/tb-dropfile-lib/tsconfig.lib.json",
+              "projects/tb-dropfile-lib/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]

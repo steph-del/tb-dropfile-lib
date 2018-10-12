@@ -1,0 +1,140 @@
+$dropbox-primary-color: #3F9FFF;
+$dropbox-primary-smooth: lighten($dropbox-primary-color, 5%);
+$dropbox-primary-light: rgba($dropbox-primary-color, .9);
+$dropbox-primary-lighter: rgba($dropbox-primary-color, .5);
+
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 300px;
+  padding: 10px;
+  border: 1px dashed $dropbox-primary-color;
+  border-radius: 0px;
+  cursor: pointer;
+
+  &:not(.fullWindow) {
+    &.over {
+      background-color: $dropbox-primary-lighter;
+    }
+  }
+
+  &.fullWindow {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: calc(100% - 20px);
+    min-width: calc(100% - 20px);
+    z-index: 99999999;
+    background-color: $dropbox-primary-light !important;
+    border-width: 3px;
+    border-style: none;
+    border-color: $dropbox-primary-light;
+    border-radius: 0px;
+    transition: background-color .2s ease-in;
+
+    .label {
+      font-size: 2em;
+      color: white; //$dropbox-primary-color;
+    }
+    .labelHelp {
+      font-size: 1.5em;
+      color: white; //$dropbox-primary-smooth;
+    }
+  }
+
+  .label {
+    display: block;
+    font-size: 1em;
+    font-weight: bold;
+  }
+  .labelHelp {
+    display: block;
+    padding-top: 10px;
+    font-size: .9em;
+    font-style: italic;
+    color: #b0b0b0;
+  }
+}
+
+.mat-table {
+  min-width: 500px;
+  width: 100%;
+  box-shadow: none;
+  border: 1px solid rgba(0,0,0,.12);
+
+  tr.mat-header-row {
+    height: 30px;
+    border-right: rgba(0,0,0,.12);
+    .mat-header-cell {
+      font-size: 14px;
+      font-weight: 0;
+    }
+  }
+  
+  tr.mat-row {
+    height: 30px;
+    border-right: rgba(0,0,0,.12);
+    &:hover {
+      background-color: #eaeaea;
+    }
+  }
+  td {
+    &.mat-flex-cell {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+
+      .additionalInfoIcons {
+        margin-top: 10px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.imagesList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .imageCard {
+    margin: 20px;
+    padding-bottom: 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+
+    img {
+      margin-bottom: 0;
+      max-height: 150px;
+      width: auto;
+
+      &.toBigForUpload {
+        filter: grayscale(100%);
+      }
+    }
+    .mat-card-actions {
+      padding-top: 0;
+      margin-top: -5px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+      .additionalInfoIcons {
+        margin-top: 8px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.iconInfo {
+  color: grey;
+}
+.iconTooltip {
+  cursor: pointer;
+}
+
