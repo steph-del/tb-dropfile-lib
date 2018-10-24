@@ -47,7 +47,7 @@ export class DropBoxComponent implements OnInit, DoCheck {
   @Output() windowDrag: EventEmitter<'enter' | 'leave'> = new EventEmitter();       // indicates when the mouse drags on element or entire window and when it leaves
   @Output() acceptedFiles: EventEmitter<FileData[]> = new EventEmitter();           // all accepted files regarding to @Input conditions
   @Output() rejectedFiles: EventEmitter<RejectedFileData[]> = new EventEmitter();   // all rejected files, with messages (why it was rejected)
-  @Output() geolocatedPhotoLatLng: EventEmitter<Array<LatLngDMS>> = new EventEmitter(); // geolocations from photos
+  @Output() geolocatedPhotoLatLng: EventEmitter<Array<LatLngDMSAltitudePhotoName>> = new EventEmitter(); // geolocations from photos
 
   @ViewChild('file') file;
   @ViewChild('dropzone') dropzone: ElementRef<HTMLInputElement>;
