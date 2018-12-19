@@ -248,23 +248,43 @@ export class DropBoxComponent implements OnInit, DoCheck {
    * Send files via API
    */
   sendFiles(): void {
-console.log('Send files...');
-console.log(this.fileList[0]);
-console.log(this.fileList[0].file);
-console.log(JSON.stringify(this.fileList[0].file));
-    const formData = new FormData();
+
+/*
+curl -i -X POST -H "Content-Type:multipart/form-data" -F 'file=@/Users/steph/Documents/Dev/tb-common/celv2/2.JPG' -F "json=@/Users/steph/Documents/Dev/tb-common/celv2/0.json" http://127.0.0.1:8000/api/photos
+*/
+
+
+
+// console.log('Send files...');
+// console.log(this.fileList[0]);
+// console.log(this.fileList[0].file);
+// console.log(JSON.stringify(this.fileList[0].file));
+    const formData = new FormData(); // for (var data of temp1.entries()) { console.log(data)}
     const dataView = new DataView(this.fileList[0].arrayBuffer);
     const blob = new Blob([dataView], { type: this.fileList[0].file.type});
-console.log(blob);
+// console.log(blob);
     const httpOptions = {
       headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': 'http://127.0.0.1:8000/api/photos',
+        'Access-Control-Allow-Origin': 'http://127.0.0.1:8000/*',
         'enctype': 'multipart/form-data'
       })
     };
-    formData.append('file', blob, this.fileList[0].file.name);
+    const photoFile = new File([blob], 'test.jpg');
+    const jsonData = {
+      userEmail: 'stephane.delplanque@e-mail.com',
+      userFirstName: 'Stephane',
+      userLastName: 'Delplanque',
+      originalName: 'test.jpg',
+      mediaObject : '/api/media_objects/1',
+      dateShot: '2018-08-18T16:34:15.017Z' };
+    const jsonBlob = new Blob([JSON.stringify(jsonData)], {type: 'text/plain'});
+    const jsonFile = new File([jsonBlob], 'data.json');
+    formData.append('file', photoFile);
+    formData.append('json', jsonFile);
     // formData.append('file', this.fileList[0].file, this.fileList[0].file.name);
-console.log(JSON.stringify(formData));
+// console.log(photoFile);
+// console.log(jsonFile);
+// console.log(formData);
 
     /* const request = new XMLHttpRequest();
     request.open('POST', 'http://127.0.0.1:8000/api/photos');
@@ -272,8 +292,10 @@ console.log(JSON.stringify(formData));
 
 
     this.http.post('http://127.0.0.1:8000/api/photos', formData, httpOptions).subscribe(r => {
+      console.log('SUCCESS');
       console.log(r);
     }, e => {
+      console.log('ERROR');
       console.log(e);
     });
 
