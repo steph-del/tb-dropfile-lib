@@ -64,6 +64,7 @@ export class DropBoxComponent implements OnInit, DoCheck {
   private acceptedFileTypes: Array<string> = ['jpeg', 'png', 'bmp', 'gif', 'pdf', 'json', 'ods', 'xls', 'xlsx', 'csv', 'odt', 'doc', 'docx', 'gpx', 'shp'];
   public canvas: HTMLCanvasElement;
   public dropZoneLabel = this.label;
+  public sendingImages = false;
 
   //
   // METHODS
@@ -259,6 +260,8 @@ export class DropBoxComponent implements OnInit, DoCheck {
    */
   sendPhotoFiles(): void {
     if (!this.uploadTbPhotoFiles) { return; }
+    this.sendingImages = true;
+
     // Construct FormData
     const formData = new FormData(); // for (var data of temp1.entries()) { console.log(data)}
     const fileName = this.fileList[0].file.name;
@@ -285,18 +288,14 @@ export class DropBoxComponent implements OnInit, DoCheck {
     formData.append('json', jsonFile, 'data.json');
 
     this.http.post('http://127.0.0.1:8000/api/photos', formData, httpOptions).subscribe(r => {
+      this.sendingImages = false;
       // console.log('SUCCESS');
       // console.log(r);
     }, e => {
+      this.sendingImages = false;
       // console.log('ERROR');
       // console.log(e);
     });
-
-    // show spinner
-    // get data (arrayBuffer ?)
-    // send multiFormPart
-    // if response = 200, emit Lat/lng image GPS metadata
-    // if response != 200, manage error
 
   }
 

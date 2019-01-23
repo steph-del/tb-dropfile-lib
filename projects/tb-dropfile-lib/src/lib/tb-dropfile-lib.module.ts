@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule, MatTableModule, MatButtonModule, MatTooltipModule } from '@angular/material';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 
 import { TbDropfileLibComponent } from './tb-dropfile-lib.component';
@@ -18,7 +19,7 @@ import { FileSizePipe } from './_pipes/file-size.pipe';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatCardModule, MatTableModule, MatButtonModule, MatTooltipModule, MatIconModule
+    MatCardModule, MatTableModule, MatButtonModule, MatTooltipModule, MatIconModule, MatProgressSpinnerModule
   ],
   declarations: [TbDropfileLibComponent, DropBoxComponent, DroppableDirective, FileTypePipe, FileSizePipe],
   exports: [TbDropfileLibComponent, DropBoxComponent]

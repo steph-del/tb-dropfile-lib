@@ -143,4 +143,11 @@ $dropbox-primary-lighter: rgba($dropbox-primary-color, .5);
   text-align: center;
   margin-top: 20px;
   margin-bottom: 10px;
+
+  .spinner {
+    display: inline-flex;
+    p {
+      margin-right: 10px;
+    }
+  }
 }

@@ -21,7 +21,12 @@
 </div>
 
 <div class="button-action" *ngIf="fileList.length > 0 && uploadTbPhotoFiles">
-  <button mat-flat-button (click)="sendFiles()">Enregistrer les fichiers</button>
+  <button *ngIf="sendingImages" mat-flat-button (click)="sendFiles()">Enregistrer les fichiers</button>
+  <div class="spinner" *ngIf="!sendingImages">
+    <p><mat-spinner diameter="18"></mat-spinner></p>
+    <p *ngIf="fileList.length == 1">Envoi de l'image en cours</p>
+    <p *ngIf="fileList.length > 1">Envoi de {{ fileList.length }} images en cours</p>
+  </div>
 </div>
 
 <div *ngIf="fileList.length > 0 && showTable">
