@@ -134,7 +134,8 @@ export class DropBoxComponent implements OnInit, DoCheck {
             dataUrl: dataUrl,
             exifGPSLat: GPSLatLng.lat,
             exifGPSLng: GPSLatLng.lng,
-            exifGPSAltitude: GPSAltitude
+            exifGPSAltitude: GPSAltitude,
+            uploaded: false
           });
           if (index === files.length - 1) {
             // emit accepted files and gps metadata (latitude, longitude, altitude and file name)
@@ -163,7 +164,8 @@ export class DropBoxComponent implements OnInit, DoCheck {
             dataUrl: dataUrl,
             exifGPSLat: GPSLatLng.lat,
             exifGPSLng: GPSLatLng.lng,
-            exifGPSAltitude: GPSAltitude
+            exifGPSAltitude: GPSAltitude,
+            uploaded: false
           });
           if (index === files.length - 1) {
             // emit accepted files and gps metadata (latitude, longitude, altitude and file name)
@@ -289,10 +291,12 @@ export class DropBoxComponent implements OnInit, DoCheck {
 
     this.http.post('http://127.0.0.1:8000/api/photos', formData, httpOptions).subscribe(r => {
       this.sendingImages = false;
+      this.fileList[0].uploaded = true;
       // console.log('SUCCESS');
       // console.log(r);
     }, e => {
       this.sendingImages = false;
+      this.fileList[0].uploaded = 'error';
       // console.log('ERROR');
       // console.log(e);
     });

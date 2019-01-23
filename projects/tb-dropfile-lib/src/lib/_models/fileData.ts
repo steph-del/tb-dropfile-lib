@@ -10,4 +10,5 @@ export interface FileData {
   exifGPSLat?: {deg: number, min: number, sec: number};
   exifGPSLng?: {deg: number, min: number, sec: number};
   exifGPSAltitude?: number;
+  uploaded: boolean | 'error';
 }

@@ -63,7 +63,7 @@
   <div *ngFor="let data of fileList; let index = index" >
     <mat-card *ngIf="isImage(data.file)" class="imageCard">
       <img mat-card-image [class.toBigForUpload]="data.file.size > (maxImageFileSize*1000)" src="{{ data.dataUrl }}" alt="{{ data.file.name }}">
-      <mat-card-actions class="card-actions">
+      <mat-card-actions *ngIf="data.uploaded != true" class="card-actions">
         <!--
         <div class="action" *ngIf="data.file.size <= (maxImageFileSize*1000)">
           <button mat-icon-button (click)="imageRotate(data, 'left')"><mat-icon>rotate_left</mat-icon></button>
@@ -73,7 +73,10 @@
           <button mat-icon-button color="warn" matTooltip="L'image est trop volumineuse pour être utilisée"><mat-icon>warning</mat-icon></button>
           <button mat-icon-button matTooltip="Réduire la taille de 30%"(click)="reduceImageFileSize(data)"><mat-icon>photo_size_select_large</mat-icon></button>
         </div>
-      -->
+        -->
+        <div class="action" *ngIf="data.uploaded == 'error'">
+          <button mat-icon-button color="warn" matTooltip="Nous n'avons pas réussi à envoyer cette image"><mat-icon>warning</mat-icon></button>
+        </div>
         <div class="additionalInfoIcons">
           <mat-icon *ngIf="data.exifGPSLat != null && data.exifGPSLng != null" class="iconInfo iconTooltip" matTooltip="Cette image contient la latitude et la longitude de la prise de vue">where_to_vote</mat-icon>
           <mat-icon *ngIf="data.exifGPSAltitude != null" class="iconInfo iconTooltip" matTooltip="Cette image contient l'altitude de la prise de vue">terrain</mat-icon>
