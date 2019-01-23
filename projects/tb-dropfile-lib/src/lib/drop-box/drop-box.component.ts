@@ -206,6 +206,7 @@ export class DropBoxComponent implements OnInit, DoCheck {
    */
   imageRotate(imageData: FileData, direction: 'left' | 'right') {
     IM.rotateImage(this.canvas, imageData, direction);
+console.log(this.fileList[0]);
   }
 
   /**
@@ -219,6 +220,7 @@ export class DropBoxComponent implements OnInit, DoCheck {
       if (file.file.size > this.maxImageFileSize * 1000) { return this.reduceImageFileSize(file); }
     });
     this.acceptedFiles.next(this.fileList);
+console.log(this.fileList[0]);
   }
 
   /**
@@ -245,51 +247,41 @@ export class DropBoxComponent implements OnInit, DoCheck {
   }
 
   /**
-   * Send files via API
+   * Send files
    */
   sendFiles(): void {
+    this.sendPhotoFiles();
+  }
 
-/*
-curl -i -X POST -H "Content-Type:multipart/form-data" -F 'file=@/Users/steph/Documents/Dev/tb-common/celv2/2.JPG' -F "json=@/Users/steph/Documents/Dev/tb-common/celv2/0.json" http://127.0.0.1:8000/api/photos
-*/
+  /**
+   * Send photos via API
+   */
+  sendPhotoFiles(): void {
 
-
-
-// console.log('Send files...');
-// console.log(this.fileList[0]);
-// console.log(this.fileList[0].file);
-// console.log(JSON.stringify(this.fileList[0].file));
+    // Construct FormData
     const formData = new FormData(); // for (var data of temp1.entries()) { console.log(data)}
-    const dataView = new DataView(this.fileList[0].arrayBuffer);
-    const blob = new Blob([dataView], { type: this.fileList[0].file.type});
-// console.log(blob);
+    const fileName = this.fileList[0].file.name;
+
+    // When uploading files with FormData, avoid setting headers !
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': 'http://127.0.0.1:8000/*',
-        'enctype': 'multipart/form-data'
-      })
+      headers: new HttpHeaders({})
     };
-    const photoFile = new File([blob], 'test.jpg');
+
+    // Construct json data file
     const jsonData = {
       userEmail: 'stephane.delplanque@e-mail.com',
       userFirstName: 'Stephane',
       userLastName: 'Delplanque',
-      originalName: 'test.jpg',
+      originalName: fileName,
+      latitude: '44',
+      longitude: '33',
       mediaObject : '/api/media_objects/1',
       dateShot: '2018-08-18T16:34:15.017Z' };
     const jsonBlob = new Blob([JSON.stringify(jsonData)], {type: 'text/plain'});
     const jsonFile = new File([jsonBlob], 'data.json');
-    formData.append('file', photoFile);
-    formData.append('json', jsonFile);
-    // formData.append('file', this.fileList[0].file, this.fileList[0].file.name);
-// console.log(photoFile);
-// console.log(jsonFile);
-// console.log(formData);
 
-    /* const request = new XMLHttpRequest();
-    request.open('POST', 'http://127.0.0.1:8000/api/photos');
-    request.send(formData);*/
-
+    formData.append('file', this.fileList[0].file, fileName);
+    formData.append('json', jsonFile, 'data.json');
 
     this.http.post('http://127.0.0.1:8000/api/photos', formData, httpOptions).subscribe(r => {
       console.log('SUCCESS');

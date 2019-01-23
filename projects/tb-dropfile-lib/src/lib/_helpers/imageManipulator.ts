@@ -75,12 +75,13 @@ export function rotateImage(_canvas: HTMLCanvasElement, data: FileData, directio
     context.drawImage(image, 0, 0, image.width, image.height);
     context.restore();
 
-    const dataUrl = canvas.toDataURL(data.file.type);
+    const dataUrl = canvas.toDataURL(data.file.type, 0.8);
     const idat = context.getImageData(0, 0, image.width, image.height);
-    const arrayBuffer = idat.data.buffer;
+    // const arrayBuffer = idat.data.buffer;
 
-    data.arrayBuffer = arrayBuffer;
+    // data.arrayBuffer = arrayBuffer;
     data.dataUrl = dataUrl;
+    data.file = new File([dataUrl], data.file.name, {type: data.file.type, lastModified: data.file.lastModified});
   };
 }
 

@@ -99,6 +99,9 @@ altitude: number;
 
 photoName: string; 
 
+### Taille des images
+Attention, si une image dépasse la taille maximale autorisée dans php.ini, son type Mime est alors interprété (modifié ?) en "octet/stream" et l'image est illisible par le back-end.
+
 ## Serveur de développement
 
 Ne pas oublier de reconstruire la librairie avant de servir l'application (`npm run build_serve` fait les deux à la suite).
