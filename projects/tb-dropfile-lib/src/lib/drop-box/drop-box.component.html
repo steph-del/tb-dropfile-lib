@@ -68,11 +68,11 @@
           <button mat-icon-button color="warn" matTooltip="L'image est trop volumineuse pour être utilisée"><mat-icon>warning</mat-icon></button>
           <button mat-icon-button matTooltip="Réduire la taille de 30%"(click)="reduceImageFileSize(data)"><mat-icon>photo_size_select_large</mat-icon></button>
         </div>
+      -->
         <div class="additionalInfoIcons">
-          <mat-icon *ngIf="data.exifGPSLat != null && data.exifGPSLng != null" class="iconInfo iconTooltip" matTooltip="Cette image contient la latitude et de la longitude de la prise de vue">where_to_vote</mat-icon>
+          <mat-icon *ngIf="data.exifGPSLat != null && data.exifGPSLng != null" class="iconInfo iconTooltip" matTooltip="Cette image contient la latitude et la longitude de la prise de vue">where_to_vote</mat-icon>
           <mat-icon *ngIf="data.exifGPSAltitude != null" class="iconInfo iconTooltip" matTooltip="Cette image contient l'altitude de la prise de vue">terrain</mat-icon>
         </div>
-        -->
         <div class="action">
           <button mat-icon-button (click)="deleteFile(index)"><mat-icon>delete</mat-icon></button>
         </div>
