@@ -43,6 +43,5 @@ export function getAltitudeFromJpegArrayBuffer(arrayBuffer) {
   let exifData: any | false;
 
   exifData = Exif.readFromBinaryFile(arrayBuffer);
-console.log(exifData);
   return exifData.GPSAltitude ? (exifData.GPSAltitude.numerator / exifData.GPSAltitude.denominator) : null;
 }
