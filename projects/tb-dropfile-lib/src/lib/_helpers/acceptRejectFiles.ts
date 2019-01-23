@@ -7,7 +7,9 @@ export function acceptRejectFiles(
   files: Array<File>,
   allowedFileTypes: Array<string>,
   ignoreOversizedFiles: boolean,
-  ignoreOversizedImageFiles: boolean): { acceptedFiles: Array<File>, rejectedFiles: Array<{file: File, message: string}> } {
+  ignoreOversizedImageFiles: boolean,
+  maxFileSize: number,
+  maxImageFileSize: number): { acceptedFiles: Array<File>, rejectedFiles: Array<{file: File, message: string}> } {
 
   const acceptedFiles: Array<File> = [];
   const rejectedFiles: Array<{file: File, message: string}> = [];
@@ -23,8 +25,8 @@ export function acceptRejectFiles(
   if (files.length > 0) {
     for (let i = 0; i < files.length; i++) {
       // max size -> not accepted
-      if (!isImage(files[i]) && ignoreOversizedFiles && files[i].size > (this._maxFileSize * 1000)) { rejectedFiles.push({file: files[i], message: '[Droppable directive]: oversized file'}); continue; }
-      if (isImage(files[i]) && ignoreOversizedImageFiles && files[i].size > (this._maxImageFileSize * 1000)) {}
+      if (!isImage(files[i]) && ignoreOversizedFiles && files[i].size > (maxFileSize * 1000)) { rejectedFiles.push({file: files[i], message: '[Droppable directive]: oversized file'}); continue; }
+      if (isImage(files[i]) && ignoreOversizedImageFiles && files[i].size > (maxImageFileSize * 1000)) { rejectedFiles.push({file: files[i], message: '[Droppable directive]: oversized image file'}); continue; }
 
       // get file extension
       const ext = files[i].name.substring(files[i].name.length - 3).toLowerCase();

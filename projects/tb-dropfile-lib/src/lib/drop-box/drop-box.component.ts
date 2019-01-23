@@ -209,7 +209,6 @@ export class DropBoxComponent implements OnInit, DoCheck {
    */
   imageRotate(imageData: FileData, direction: 'left' | 'right') {
     IM.rotateImage(this.canvas, imageData, direction);
-console.log(this.fileList[0]);
   }
 
   /**
@@ -223,7 +222,6 @@ console.log(this.fileList[0]);
       if (file.file.size > this.maxImageFileSize * 1000) { return this.reduceImageFileSize(file); }
     });
     this.acceptedFiles.next(this.fileList);
-console.log(this.fileList[0]);
   }
 
   /**
@@ -241,7 +239,7 @@ console.log(this.fileList[0]);
     const files = this.file.nativeElement.files;
 
     // Check if files (from event.dataTransfer) are accepted regarding of they MIME types and/or file extension + explicit options parameters
-    const arfResult = acceptRejectFiles(files, this.allowedFileTypes, this.ignoreOversizedFiles, this.ignoreOversizedImageFiles);
+    const arfResult = acceptRejectFiles(files, this.allowedFileTypes, this.ignoreOversizedFiles, this.ignoreOversizedImageFiles, this.maxFileSize, this.maxImageFileSize);
 
     // Emit accepted and rejected files
     this.acceptedFilesChange(arfResult.acceptedFiles);
@@ -287,11 +285,11 @@ console.log(this.fileList[0]);
     formData.append('json', jsonFile, 'data.json');
 
     this.http.post('http://127.0.0.1:8000/api/photos', formData, httpOptions).subscribe(r => {
-      console.log('SUCCESS');
-      console.log(r);
+      // console.log('SUCCESS');
+      // console.log(r);
     }, e => {
-      console.log('ERROR');
-      console.log(e);
+      // console.log('ERROR');
+      // console.log(e);
     });
 
     // show spinner

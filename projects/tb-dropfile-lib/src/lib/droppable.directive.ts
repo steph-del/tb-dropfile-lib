@@ -82,7 +82,7 @@ export class DroppableDirective implements OnInit, OnDestroy {
     this._elementClass = ['dropzone'];
 
     // Check if dropped files (from event.dataTransfer) are accepted regarding of they MIME types and/or file extension
-    const arfResult = acceptRejectFiles(event.dataTransfer.files, this._allowedFileTypes, this._ignoreOversizedFiles, this._ignoreOversizedImageFiles);
+    const arfResult = acceptRejectFiles(event.dataTransfer.files, this._allowedFileTypes, this._ignoreOversizedFiles, this._ignoreOversizedImageFiles, this._maxFileSize, this._maxImageFileSize);
 
     // Emit accepted and rejected files
     this._filesChangeEmitter.emit(arfResult.acceptedFiles);
