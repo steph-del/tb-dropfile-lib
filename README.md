@@ -47,6 +47,9 @@ Ci-dessous et dans le code, les fichiers non images sont désignés comme 'file'
 | ignoreOversizedImageFiles |        | boolean  |         | true | idem pour les photos |
 | allowFullWindowDrop       |        | boolean  |         | false | si true, la dropbox passe en plein écran lors du survol de la souris pour déposer un iu plusieurs fichiers. Attention, ne pas utiliser cette option si plusieurs dropbox sont utilisées dans l'application (une seule active) |
 | allowedFileTypes          | non mais recommandé ! | Array<string>  |         | 'jpeg', 'png', 'bmp', 'gif', 'pdf', 'json', 'ods', 'xls', 'xlsx', 'csv', 'odt', 'doc', 'docx', 'gpx', 'shp' | types de fichiers à prendre en compte |
+| uploadTbPhotoFiles        |        | boolean  |         | false              | active l'upload des photos
+| showTable                 |        | boolean  |         | true               | affiche les informations des fichiers en table |
+| showThumbnails            |        | boolean  |         | false              | affiche les miniatures des ficihers |
 
 ### Paramètres en sortie @Output
 

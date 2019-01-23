@@ -121,7 +121,7 @@ $dropbox-primary-lighter: rgba($dropbox-primary-color, .5);
       margin-top: -5px;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: end; // space-between
 
       .additionalInfoIcons {
         margin-top: 8px;
@@ -138,3 +138,8 @@ $dropbox-primary-lighter: rgba($dropbox-primary-color, .5);
   cursor: pointer;
 }
 
+.button-action {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}

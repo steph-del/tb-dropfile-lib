@@ -38,6 +38,9 @@ export class DropBoxComponent implements OnInit, DoCheck {
   @Input() ignoreOversizedFiles = true;         // if true (default), oversized files are emitted in rejectedFiles; otherwise, files are going in the main pipe : accepetdFiles, then you have to manage !!
   @Input() ignoreOversizedImageFiles = false;   // same as above. note that user can resize images.
   @Input() allowFullWindowDrop = false;         // fullWindow drop enabled / disabled
+  @Input() uploadTbPhotoFiles = false;
+  @Input() showTable = true;
+  @Input() showThumbnails = false;
 
   // File type is named by its extension but MIME type is checked
   // Accept jpeg, png, bmp, gif, pdf, json, ods, xls, xlsx, odt, doc, docx, gpx and shp
@@ -257,7 +260,7 @@ console.log(this.fileList[0]);
    * Send photos via API
    */
   sendPhotoFiles(): void {
-
+    if (!this.uploadTbPhotoFiles) { return; }
     // Construct FormData
     const formData = new FormData(); // for (var data of temp1.entries()) { console.log(data)}
     const fileName = this.fileList[0].file.name;

@@ -20,11 +20,11 @@
   <input type="file" #file (change)="onFilesInputChange()" formControlName="files" multiple />
 </div>
 
-<div class="action" *ngIf="fileList.length > 0">
+<div class="button-action" *ngIf="fileList.length > 0 && uploadTbPhotoFiles">
   <button mat-flat-button (click)="sendFiles()">Enregistrer les fichiers</button>
 </div>
 
-<div *ngIf="fileList.length > 0">
+<div *ngIf="fileList.length > 0 && showTable">
   <table #table mat-table [dataSource]="fileList" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Nom</th>
@@ -54,11 +54,12 @@
   
 </div>
 
-<div class="imagesList">
+<div *ngIf="showThumbnails" class="imagesList">
   <div *ngFor="let data of fileList; let index = index" >
     <mat-card *ngIf="isImage(data.file)" class="imageCard">
       <img mat-card-image [class.toBigForUpload]="data.file.size > (maxImageFileSize*1000)" src="{{ data.dataUrl }}" alt="{{ data.file.name }}">
       <mat-card-actions class="card-actions">
+        <!--
         <div class="action" *ngIf="data.file.size <= (maxImageFileSize*1000)">
           <button mat-icon-button (click)="imageRotate(data, 'left')"><mat-icon>rotate_left</mat-icon></button>
           <button mat-icon-button (click)="imageRotate(data, 'right')"><mat-icon>rotate_right</mat-icon></button>
@@ -71,6 +72,7 @@
           <mat-icon *ngIf="data.exifGPSLat != null && data.exifGPSLng != null" class="iconInfo iconTooltip" matTooltip="Cette image contient la latitude et de la longitude de la prise de vue">where_to_vote</mat-icon>
           <mat-icon *ngIf="data.exifGPSAltitude != null" class="iconInfo iconTooltip" matTooltip="Cette image contient l'altitude de la prise de vue">terrain</mat-icon>
         </div>
+        -->
         <div class="action">
           <button mat-icon-button (click)="deleteFile(index)"><mat-icon>delete</mat-icon></button>
         </div>

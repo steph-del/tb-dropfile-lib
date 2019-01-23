@@ -9,6 +9,9 @@
   [label]="'Déposer une photo ici ou cliquer pour importer'"
   [labelHelp]="'Fichiers jpeg et png uniquement, 5 mb max par image'"
   [labelFullWindow]="'Déposer une photo ici'"
+  [uploadTbPhotoFiles]="true"
+  [showTable]="false"
+  [showThumbnails]="true"
   (acceptedFiles)="acceptedFiles($event)"
   (rejectedFiles)="rejectedFiles($event)"
   (geolocatedPhotoLatLng)="geolocatedPhotoLatLng($event)"></tb-dropfile-box>
