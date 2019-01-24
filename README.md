@@ -57,6 +57,7 @@ Ci-dessous et dans le code, les fichiers non images sont désignés comme 'file'
 | ---                   | ---                                  | ---         |
 | acceptedFiles         | FileData\[]                          | ensemble des fichiers retenus pour l'upload  |
 | rejectedFiles         | RejectedFileData\[]                  | ensemble des fichiers rejetés pour l'upload |
+| deletedFiles          | FileData\[]                          | ensemble des fichiers supprimés par l'utilisateur |
 | geolocatedPhotoLatLng | LatLngDMSAltitudePhotoName\[]        | données provenant des photos géolocalisées |
 
 
@@ -83,6 +84,8 @@ exifGPSLat?: {deg: number, min: number, sec: number};
 exifGPSLng?: {deg: number, min: number, sec: number};
 
 exifGPSAltitude?: number;
+
+uploaded: boolean | 'error';
 
 
 RejectedFileData : 

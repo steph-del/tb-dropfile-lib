@@ -14,6 +14,10 @@ export class AppComponent {
     console.log(data);
   }
 
+  deletedFiles(data) {
+    console.log(data);
+  }
+
   geolocatedPhotoLatLng(data) {
     console.log(data);
     console.log(JSON.stringify(data));

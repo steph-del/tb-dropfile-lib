@@ -51,6 +51,7 @@ export class DropBoxComponent implements OnInit, DoCheck {
   @Output() acceptedFiles: EventEmitter<FileData[]> = new EventEmitter();           // all accepted files regarding to @Input conditions
   @Output() rejectedFiles: EventEmitter<RejectedFileData[]> = new EventEmitter();   // all rejected files, with messages (why it was rejected)
   @Output() geolocatedPhotoLatLng: EventEmitter<Array<LatLngDMSAltitudePhotoName>> = new EventEmitter(); // geolocations from photos
+  @Output() deletedFiles: EventEmitter<FileData[]> = new EventEmitter();            // deleted files by user
 
   @ViewChild('file') file;
   @ViewChild('dropzone') dropzone: ElementRef<HTMLInputElement>;
@@ -231,6 +232,7 @@ export class DropBoxComponent implements OnInit, DoCheck {
    * Delete a file from fileList
    */
   deleteFile(fileToRemoveIndex: number) {
+    this.deletedFiles.next([this.fileList[fileToRemoveIndex]]);
     this.fileList.splice(fileToRemoveIndex, 1);
     this.renderRows();
   }
