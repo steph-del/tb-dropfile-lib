@@ -50,6 +50,7 @@ Ci-dessous et dans le code, les fichiers non images sont désignés comme 'file'
 | uploadTbPhotoFiles        |        | boolean  |         | false              | active l'upload des photos
 | showTable                 |        | boolean  |         | true               | affiche les informations des fichiers en table |
 | showThumbnails            |        | boolean  |         | false              | affiche les miniatures des ficihers |
+| reset                     |        | boolean  |         | false              | RAZ du composant si true |
 
 ### Paramètres en sortie @Output
 
