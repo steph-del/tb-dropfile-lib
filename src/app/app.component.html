@@ -12,8 +12,12 @@
   [uploadTbPhotoFiles]="true"
   [showTable]="false"
   [showThumbnails]="true"
+  [reset]="_reset"
   (acceptedFiles)="acceptedFiles($event)"
   (rejectedFiles)="rejectedFiles($event)"
   (deletedFiles)="deletedFiles($event)"
   (geolocatedPhotoLatLng)="geolocatedPhotoLatLng($event)"></tb-dropfile-box>
 </div>
+
+<br /><br />
+<p (click)="reset()">RESET</p>

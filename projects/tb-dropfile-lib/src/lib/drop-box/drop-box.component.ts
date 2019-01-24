@@ -41,6 +41,9 @@ export class DropBoxComponent implements OnInit, DoCheck {
   @Input() uploadTbPhotoFiles = false;
   @Input() showTable = true;
   @Input() showThumbnails = false;
+  @Input() set reset(value: boolean) {
+    if (value === true) { this.resetComponent(); }
+  }
 
   // File type is named by its extension but MIME type is checked
   // Accept jpeg, png, bmp, gif, pdf, json, ods, xls, xlsx, odt, doc, docx, gpx and shp
@@ -348,6 +351,13 @@ export class DropBoxComponent implements OnInit, DoCheck {
       });
     }
     return response;
+  }
+
+  /**
+   * Reset component
+   */
+  resetComponent() {
+    this.fileList = [];
   }
 
 }

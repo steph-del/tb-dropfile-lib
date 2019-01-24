@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  _reset: boolean;
+
   acceptedFiles(data) {
     console.log(data);
   }
@@ -21,5 +23,12 @@ export class AppComponent {
   geolocatedPhotoLatLng(data) {
     console.log(data);
     console.log(JSON.stringify(data));
+  }
+
+  public reset() {
+    this._reset = true;
+    setTimeout(() => {
+      this._reset = false;
+    }, 100);
   }
 }
