@@ -20,16 +20,16 @@
   <input type="file" #file (change)="onFilesInputChange()" formControlName="files" multiple />
 </div>
 
-<div class="button-action" *ngIf="fileList.length > 0 && uploadTbPhotoFiles">
-  <button *ngIf="sendingImages" mat-flat-button (click)="sendFiles()">Enregistrer les fichiers</button>
-  <div class="spinner" *ngIf="!sendingImages">
+<div class="button-action" *ngIf="nbImagesToSend() > 0 && uploadTbPhotoFiles">
+  <button *ngIf="!sendingImages" mat-flat-button (click)="sendFiles()">Enregistrer les fichiers</button>
+  <div class="spinner" *ngIf="sendingImages">
     <p><mat-spinner diameter="18"></mat-spinner></p>
-    <p *ngIf="fileList.length == 1">Envoi de l'image en cours</p>
-    <p *ngIf="fileList.length > 1">Envoi de {{ fileList.length }} images en cours</p>
+    <p *ngIf="nbImagesToSend() == 1">Envoi de l'image en cours</p>
+    <p *ngIf="nbImagesToSend() > 1">Envoi de {{ nbImagesToSend() }} images en cours</p>
   </div>
 </div>
 
-<div *ngIf="fileList.length > 0 && showTable">
+<div *ngIf="nbImagesToSend() > 0 && showTable">
   <table #table mat-table [dataSource]="fileList" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Nom</th>
@@ -83,6 +83,16 @@
         </div>
         <div class="action">
           <button mat-icon-button (click)="deleteFile(index)"><mat-icon>delete</mat-icon></button>
+        </div>
+      </mat-card-actions>
+
+      <mat-card-actions *ngIf="data.uploaded == true" class="card-actions">
+        <div class="additionalInfoIcons">
+          <mat-icon *ngIf="data.exifGPSLat != null && data.exifGPSLng != null" class="iconInfo iconTooltip" matTooltip="Cette image contient la latitude et la longitude de la prise de vue">where_to_vote</mat-icon>
+          <mat-icon *ngIf="data.exifGPSAltitude != null" class="iconInfo iconTooltip" matTooltip="Cette image contient l'altitude de la prise de vue">terrain</mat-icon>
+        </div>
+        <div class="action" style="color:green;">
+          <button mat-icon-button><mat-icon>check_circle</mat-icon></button>
         </div>
       </mat-card-actions>
     </mat-card>

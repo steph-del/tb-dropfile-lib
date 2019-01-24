@@ -262,45 +262,61 @@ export class DropBoxComponent implements OnInit, DoCheck {
    */
   sendPhotoFiles(): void {
     if (!this.uploadTbPhotoFiles) { return; }
+    if (this.nbImagesToSend() === 0) { return; }
+
     this.sendingImages = true;
+    let i = 0;
 
-    // Construct FormData
-    const formData = new FormData(); // for (var data of temp1.entries()) { console.log(data)}
-    const fileName = this.fileList[0].file.name;
+    for (const F of this.fileList) {
+      if (F.uploaded !== false) { continue; }
 
-    // When uploading files with FormData, avoid setting headers !
-    const httpOptions = {
-      headers: new HttpHeaders({})
-    };
+      // Construct FormData
+      const formData = new FormData(); // for (var data of temp1.entries()) { console.log(data)}
+      const fileName = F.file.name;
 
-    // Construct json data file
-    const jsonData = {
-      userEmail: 'stephane.delplanque@e-mail.com',
-      userFirstName: 'Stephane',
-      userLastName: 'Delplanque',
-      originalName: fileName,
-      latitude: '44',
-      longitude: '33',
-      mediaObject : '/api/media_objects/1',
-      dateShot: '2018-08-18T16:34:15.017Z' };
-    const jsonBlob = new Blob([JSON.stringify(jsonData)], {type: 'text/plain'});
-    const jsonFile = new File([jsonBlob], 'data.json');
+      // When uploading files with FormData, avoid setting headers !
+      const httpOptions = {
+        headers: new HttpHeaders({})
+      };
 
-    formData.append('file', this.fileList[0].file, fileName);
-    formData.append('json', jsonFile, 'data.json');
+      // Construct json data file
+      const jsonData = {
+        userEmail: 'stephane.delplanque@e-mail.com',
+        userFirstName: 'Stephane',
+        userLastName: 'Delplanque',
+        originalName: fileName,
+        latitude: '44',
+        longitude: '33',
+        mediaObject : '/api/media_objects/1',
+        dateShot: '2018-08-18T16:34:15.017Z' };
+      const jsonBlob = new Blob([JSON.stringify(jsonData)], {type: 'text/plain'});
+      const jsonFile = new File([jsonBlob], 'data.json');
 
-    this.http.post('http://127.0.0.1:8000/api/photos', formData, httpOptions).subscribe(r => {
-      this.sendingImages = false;
-      this.fileList[0].uploaded = true;
-      // console.log('SUCCESS');
-      // console.log(r);
-    }, e => {
-      this.sendingImages = false;
-      this.fileList[0].uploaded = 'error';
-      // console.log('ERROR');
-      // console.log(e);
-    });
+      formData.append('file', F.file, fileName);
+      formData.append('json', jsonFile, 'data.json');
 
+      this.http.post('http://127.0.0.1:8000/api/photos', formData, httpOptions).subscribe(r => {
+        F.uploaded = true;
+        this.sendingImages = this.nbImagesToSend() === 0 ? false : true;
+        i++;
+      }, e => {
+        F.uploaded = 'error';
+        this.sendingImages = this.nbImagesToSend() === 0 ? false : true;
+        i++;
+      });
+    }
+
+  }
+
+  /**
+   * How many images to send ?
+   */
+  nbImagesToSend(): number {
+    let i = 0;
+    for (const F of this.fileList) {
+      if (F.uploaded === false) { i++; }
+    }
+    return i;
   }
 
   /**
