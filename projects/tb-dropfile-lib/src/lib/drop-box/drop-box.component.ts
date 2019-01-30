@@ -42,7 +42,7 @@ export class DropBoxComponent implements OnInit, DoCheck {
   @Input() showTable = true;
   @Input() showThumbnails = false;
   @Input() set reset(value: boolean) {
-    if (value === true) { this.resetComponent(); }
+    if (value && value === true) { this.resetComponent(); }
   }
 
   // File type is named by its extension but MIME type is checked
