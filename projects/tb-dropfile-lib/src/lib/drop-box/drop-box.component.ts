@@ -286,14 +286,14 @@ export class DropBoxComponent implements OnInit, DoCheck {
 
       // Construct json data file
       const jsonData = {
-        userEmail: 'stephane.delplanque@e-mail.com',
-        userFirstName: 'Stephane',
-        userLastName: 'Delplanque',
+        userEmail: '',
+        userFirstName: '',
+        userLastName: '',
         originalName: fileName,
-        latitude: '44',
-        longitude: '33',
-        mediaObject : '/api/media_objects/1',
-        dateShot: '2018-08-18T16:34:15.017Z' };
+        latitude: '',
+        longitude: '',
+        mediaObject : '',
+        dateShot: '' };
       const jsonBlob = new Blob([JSON.stringify(jsonData)], {type: 'text/plain'});
       const jsonFile = new File([jsonBlob], 'data.json');
 
