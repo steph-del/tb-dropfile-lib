@@ -60,6 +60,7 @@ Ci-dessous et dans le code, les fichiers non images sont désignés comme 'file'
 | acceptedFiles         | FileData\[]                          | ensemble des fichiers retenus pour l'upload  |
 | rejectedFiles         | RejectedFileData\[]                  | ensemble des fichiers rejetés pour l'upload |
 | deletedFiles          | FileData\[]                          | ensemble des fichiers supprimés par l'utilisateur |
+| uploadedFiles         | Json                                 | réponse du serveur à chaque upload réussi |
 | geolocatedPhotoLatLng | LatLngDMSAltitudePhotoName\[]        | données provenant des photos géolocalisées |
 
 

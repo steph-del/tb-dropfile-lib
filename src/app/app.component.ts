@@ -25,6 +25,10 @@ export class AppComponent {
     console.log(JSON.stringify(data));
   }
 
+  uploadedFiles(data) {
+    console.log(data);
+  }
+
   public reset() {
     this._reset = true;
     setTimeout(() => {
