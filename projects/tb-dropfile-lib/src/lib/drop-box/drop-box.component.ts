@@ -49,7 +49,7 @@ export class DropBoxComponent implements OnInit, DoCheck {
   // Accept jpeg, png, bmp, gif, pdf, json, ods, xls, xlsx, odt, doc, docx, gpx and shp
   // ie ['jpeg', 'png']
   @Input() allowedFileTypes: Array<string> = [];
-  @Input() photoUploadBaseUrl = 'http://127.0.0.1:8000';
+  @Input() photoUploadBaseUrl = 'http://127.0.0.1:8000/api';
 
   @Output() windowDrag: EventEmitter<'enter' | 'leave'> = new EventEmitter();       // indicates when the mouse drags on element or entire window and when it leaves
   @Output() acceptedFiles: EventEmitter<FileData[]> = new EventEmitter();           // all accepted files regarding to @Input conditions
@@ -302,7 +302,7 @@ export class DropBoxComponent implements OnInit, DoCheck {
       formData.append('file', F.file, fileName);
       formData.append('json', jsonFile, 'data.json');
 
-      this.http.post(`${this.photoUploadBaseUrl}/api/photos`, formData, httpOptions).subscribe(r => {
+      this.http.post(`${this.photoUploadBaseUrl}/photos`, formData, httpOptions).subscribe(r => {
         F.uploaded = true;
         this.uploadedFiles.emit(r);
         this.sendingImages = this.nbImagesToSend() === 0 ? false : true;
