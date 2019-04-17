@@ -57,6 +57,7 @@ export class DropBoxComponent implements OnInit, DoCheck {
   @Output() uploadedFiles: EventEmitter<any> = new EventEmitter();                  // all uploaded files
   @Output() geolocatedPhotoLatLng: EventEmitter<Array<LatLngDMSAltitudePhotoName>> = new EventEmitter(); // geolocations from photos
   @Output() deletedFiles: EventEmitter<FileData[]> = new EventEmitter();            // deleted files by user
+  @Output() httpError: EventEmitter<any> = new EventEmitter();
 
   @ViewChild('file') file;
   @ViewChild('dropzone') dropzone: ElementRef<HTMLInputElement>;
@@ -308,6 +309,7 @@ export class DropBoxComponent implements OnInit, DoCheck {
         this.sendingImages = this.nbImagesToSend() === 0 ? false : true;
         i++;
       }, e => {
+        this.httpError.next(e);
         F.uploaded = 'error';
         this.sendingImages = this.nbImagesToSend() === 0 ? false : true;
         i++;
