@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   _reset: boolean;
+  _sendImages = false;
 
   acceptedFiles(data) {
     console.log(data);
@@ -29,10 +30,21 @@ export class AppComponent {
     console.log(data);
   }
 
-  public reset() {
+  httpError(e) {
+    console.log(e);
+  }
+
+  reset() {
     this._reset = true;
     setTimeout(() => {
       this._reset = false;
+    }, 100);
+  }
+
+  sendImages() {
+    this._sendImages = true;
+    setTimeout(() => {
+      this._sendImages = false;
     }, 100);
   }
 }

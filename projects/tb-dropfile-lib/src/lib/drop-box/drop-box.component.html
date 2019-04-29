@@ -12,8 +12,17 @@
   (_filesChangeEmitter)="acceptedFilesChange($event)"
   (_filesRejectedEmitter)="rejectedFilesChange($event)"
   (click)="addFiles()">
-  <span class="label">{{ dropZoneLabel }}</span>
-  <span class="labelHelp" *ngIf="labelHelp != ''">{{ labelHelp }}</span>
+  <div *ngIf="!sendingImages">
+    <span class="label">{{ dropZoneLabel }}</span>
+    <span class="labelHelp" *ngIf="labelHelp != ''">{{ labelHelp }}</span>
+  </div>
+  <div *ngIf="sendingImages">
+    <div class="send-images-spinner-text">
+      <span class="spinner"><mat-spinner diameter="18"></mat-spinner></span>
+      <span *ngIf="nbImagesToSend() == 1">Envoi de l'image en cours</span>
+      <span *ngIf="nbImagesToSend() > 1">Envoi de {{ nbImagesToSend() }} images en cours</span>
+    </div>
+  </div>
 </div>
 
 <div [formGroup]="form" style="display: none">
@@ -21,12 +30,8 @@
 </div>
 
 <div class="button-action" *ngIf="nbImagesToSend() > 0 && uploadTbPhotoFiles">
-  <button *ngIf="!sendingImages" mat-flat-button (click)="sendFiles()">Enregistrer les fichiers</button>
-  <div class="spinner" *ngIf="sendingImages">
-    <p><mat-spinner diameter="18"></mat-spinner></p>
-    <p *ngIf="nbImagesToSend() == 1">Envoi de l'image en cours</p>
-    <p *ngIf="nbImagesToSend() > 1">Envoi de {{ nbImagesToSend() }} images en cours</p>
-  </div>
+  <!--<button class="tb-dropfile-lib send-images-button" mat-stroked-button color="primary" *ngIf="!sendingImages" (click)="sendFiles()">Enregistrer les fichiers</button>-->
+  
 </div>
 
 <div *ngIf="nbImagesToSend() > 0 && showTable">

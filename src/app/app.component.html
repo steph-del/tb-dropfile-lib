@@ -12,13 +12,17 @@
   [uploadTbPhotoFiles]="true"
   showTable="false"
   showThumbnails="true"
+  [sendImages]="_sendImages"
   [reset]="_reset"
   (acceptedFiles)="acceptedFiles($event)"
   (rejectedFiles)="rejectedFiles($event)"
   (deletedFiles)="deletedFiles($event)"
   (uploadedFiles)="uploadedFiles($event)"
+  (httpError)="httpError($event)"
   (geolocatedPhotoLatLng)="geolocatedPhotoLatLng($event)"></tb-dropfile-box>
 </div>
+
+<button mat-stroked-button color="primary" (click)="sendImages()">Envoyer les images</button>
 
 <br /><br />
 <p (click)="reset()">RESET</p>

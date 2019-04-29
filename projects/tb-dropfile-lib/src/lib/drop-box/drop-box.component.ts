@@ -41,6 +41,9 @@ export class DropBoxComponent implements OnInit, DoCheck {
   @Input() uploadTbPhotoFiles = false;
   @Input() showTable = true;
   @Input() showThumbnails = false;
+  @Input() set sendImages(value: boolean) {
+    if (value && value === true) { this.sendFiles(); }
+  }
   @Input() set reset(value: boolean) {
     if (value && value === true) { this.resetComponent(); }
   }
@@ -306,11 +309,28 @@ export class DropBoxComponent implements OnInit, DoCheck {
       this.http.post(`${this.photoUploadBaseUrl}/photos`, formData, httpOptions).subscribe(r => {
         F.uploaded = true;
         this.uploadedFiles.emit(r);
+        // remove file from uploadedFiles
+        let j = 0;
+        for (const file of this.fileList) {
+          if (file === F) {
+            this.fileList.splice(j, 1);
+          }
+          j++;
+        }
         this.sendingImages = this.nbImagesToSend() === 0 ? false : true;
         i++;
       }, e => {
         this.httpError.next(e);
         F.uploaded = 'error';
+        // remove file from uploadedFiles
+        // remove file from uploadedFiles
+        let j = 0;
+        for (const file of this.fileList) {
+          if (file === F) {
+            this.fileList.splice(j, 1);
+          }
+          j++;
+        }
         this.sendingImages = this.nbImagesToSend() === 0 ? false : true;
         i++;
       });
