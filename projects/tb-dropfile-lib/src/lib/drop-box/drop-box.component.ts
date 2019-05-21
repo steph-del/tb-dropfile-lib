@@ -246,6 +246,18 @@ export class DropBoxComponent implements OnInit, DoCheck {
     this.renderRows();
   }
 
+  deleteFileByFileIndex(fileIndex: number) {
+    let i = 0;
+    for (const f of this.fileList) {
+      if (fileIndex === f.index) {
+        this.deletedFiles.next([this.fileList[i]]);
+        this.fileList.splice(i, 1);
+        this.renderRows();
+      }
+      i++;
+    }
+  }
+
   /**
    * When user selects select files by browsing his hard drive
    */
@@ -305,6 +317,9 @@ export class DropBoxComponent implements OnInit, DoCheck {
 
       formData.append('file', F.file, fileName);
       formData.append('json', jsonFile, 'data.json');
+
+      console.log('SEND PHOTO FILES');
+      console.log(formData.get('file'));
 
       this.http.post(`${this.photoUploadBaseUrl}/photos`, formData, httpOptions).subscribe(r => {
         F.uploaded = true;
