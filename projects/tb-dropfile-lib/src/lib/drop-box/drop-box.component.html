@@ -55,7 +55,7 @@
             <mat-icon *ngIf="element.exifGPSLat != null && element.exifGPSLng != null" class="iconInfo iconTooltip" matTooltip="Cette image contient la latitude et de la longitude de la prise de vue">where_to_vote</mat-icon>
             <mat-icon *ngIf="element.exifGPSAltitude != null" class="iconInfo iconTooltip" matTooltip="Cette image contient l'altitude de la prise de vue">terrain</mat-icon>
           </p>
-          <button type="button" mat-icon-button (click)="$event.preventDefault(); deleteFile(element.index)"><mat-icon>delete</mat-icon></button></td>
+          <button type="button" mat-icon-button (click)="$event.preventDefault(); deleteFileByFileIndex(element.index)"><mat-icon>delete</mat-icon></button></td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
