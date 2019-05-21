@@ -55,7 +55,7 @@
             <mat-icon *ngIf="element.exifGPSLat != null && element.exifGPSLng != null" class="iconInfo iconTooltip" matTooltip="Cette image contient la latitude et de la longitude de la prise de vue">where_to_vote</mat-icon>
             <mat-icon *ngIf="element.exifGPSAltitude != null" class="iconInfo iconTooltip" matTooltip="Cette image contient l'altitude de la prise de vue">terrain</mat-icon>
           </p>
-          <button mat-icon-button (click)="deleteFile(element.index)"><mat-icon>delete</mat-icon></button></td>
+          <button type="button" mat-icon-button (click)="$event.preventDefault(); deleteFile(element.index)"><mat-icon>delete</mat-icon></button></td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -80,14 +80,14 @@
         </div>
         -->
         <div class="action" *ngIf="data.uploaded == 'error'">
-          <button mat-icon-button color="warn" matTooltip="Nous n'avons pas réussi à envoyer cette image"><mat-icon>warning</mat-icon></button>
+          <button type="button" mat-icon-button color="warn" matTooltip="Nous n'avons pas réussi à envoyer cette image"><mat-icon>warning</mat-icon></button>
         </div>
         <div class="additionalInfoIcons">
           <mat-icon *ngIf="data.exifGPSLat != null && data.exifGPSLng != null" class="iconInfo iconTooltip" matTooltip="Cette image contient la latitude et la longitude de la prise de vue">where_to_vote</mat-icon>
           <mat-icon *ngIf="data.exifGPSAltitude != null" class="iconInfo iconTooltip" matTooltip="Cette image contient l'altitude de la prise de vue">terrain</mat-icon>
         </div>
         <div class="action">
-          <button mat-icon-button (click)="deleteFile(index)"><mat-icon>delete</mat-icon></button>
+          <button type="button" mat-icon-button (click)="$event.preventDefault(); deleteFile(index)"><mat-icon>delete</mat-icon></button>
         </div>
       </mat-card-actions>
 
@@ -97,7 +97,7 @@
           <mat-icon *ngIf="data.exifGPSAltitude != null" class="iconInfo iconTooltip" matTooltip="Cette image contient l'altitude de la prise de vue">terrain</mat-icon>
         </div>
         <div class="action" style="color:green;">
-          <button mat-icon-button><mat-icon>check_circle</mat-icon></button>
+          <button type="button" mat-icon-button><mat-icon>check_circle</mat-icon></button>
         </div>
       </mat-card-actions>
     </mat-card>
