@@ -5,7 +5,7 @@
   [maxImageFileSize]="2000"
   [ignoreOversizedFiles]="false"
   [ignoreOversizedImageFiles]="true"
-  [allowFullWindowDrop]="true"
+  [allowFullWindowDrop]="false"
   [label]="'Déposer une photo ici ou cliquer pour importer'"
   [labelHelp]="'Fichiers jpeg et png uniquement, 5 mb max par image'"
   [labelFullWindow]="'Déposer une photo ici'"
@@ -13,6 +13,7 @@
   showTable="false"
   showThumbnails="true"
   [sendImages]="_sendImages"
+  [enabled]="enabled"
   [reset]="_reset"
   (acceptedFiles)="acceptedFiles($event)"
   (rejectedFiles)="rejectedFiles($event)"
@@ -25,4 +26,6 @@
 <button mat-stroked-button color="primary" color="primary" (click)="sendImages()">Envoyer les images</button>
 
 <br /><br />
+<button (click)="toggleEnabled()">toggle enabled</button>
+
 <p (click)="reset()">RESET</p>

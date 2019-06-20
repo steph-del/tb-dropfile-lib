@@ -1,5 +1,5 @@
 <!-- class attribute is code-side managed-->
-<div class="dropzone" matTooltip="Ajouter une photo depuis son ordinateur"
+<div class="dropzone" [class.disabled]="!componentEnabled" matTooltip="Ajouter une photo depuis son ordinateur"
   #dropzone
   droppable
   [_allowedFileTypes]="allowedFileTypes"

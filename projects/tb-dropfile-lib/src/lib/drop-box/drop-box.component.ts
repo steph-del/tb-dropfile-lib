@@ -53,6 +53,9 @@ export class DropBoxComponent implements OnInit, DoCheck {
   // ie ['jpeg', 'png']
   @Input() allowedFileTypes: Array<string> = [];
   @Input() photoUploadBaseUrl = 'http://127.0.0.1:8000/api';
+  @Input() set enabled(value: boolean) {
+    this.componentEnabled = value;
+  }
 
   @Output() windowDrag: EventEmitter<'enter' | 'leave'> = new EventEmitter();       // indicates when the mouse drags on element or entire window and when it leaves
   @Output() acceptedFiles: EventEmitter<FileData[]> = new EventEmitter();           // all accepted files regarding to @Input conditions
@@ -75,6 +78,7 @@ export class DropBoxComponent implements OnInit, DoCheck {
   public canvas: HTMLCanvasElement;
   public dropZoneLabel = this.label;
   public sendingImages = false;
+  public componentEnabled = true;
 
   //
   // METHODS
@@ -368,7 +372,9 @@ export class DropBoxComponent implements OnInit, DoCheck {
    * Mimic a click on the input field (hidden)
    */
   addFiles() {
-    this.file.nativeElement.click();
+    if (this.componentEnabled) {
+      this.file.nativeElement.click();
+    }
   }
 
   /**

@@ -18,6 +18,9 @@ $dropbox-primary-lighter: rgba($dropbox-primary-color, .5);
     &.over {
       background-color: $dropbox-primary-lighter;
     }
+    &.disabled {
+      border: 1px dashed grey; 
+    }
   }
 
   &.fullWindow {

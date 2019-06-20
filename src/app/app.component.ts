@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   _reset: boolean;
   _sendImages = false;
+  enabled = true;
 
   acceptedFiles(data) {
     console.log(data);
@@ -32,6 +33,10 @@ export class AppComponent {
 
   httpError(e) {
     console.log(e);
+  }
+
+  toggleEnabled(): void {
+    this.enabled = !this.enabled;
   }
 
   reset() {
