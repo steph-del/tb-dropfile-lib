@@ -11,11 +11,11 @@ export class AppComponent {
   enabled = true;
 
   acceptedFiles(data) {
-    console.log(data);
+    console.log('acceptedFiles', data);
   }
 
   rejectedFiles(data) {
-    console.log(data);
+    console.log('rejectedFiles', data);
   }
 
   deletedFiles(data) {

@@ -49,6 +49,8 @@ export function acceptRejectFiles(
         (ext === 'gpx' && allowedFileTypes.indexOf('gpx') !== -1)
         || ((ext === 'shp' && allowedFileTypes.indexOf('shp') !== -1))) {
         acceptedFiles.push(files[i]);
+      } else {
+        rejectedFiles.push({file: files[i], message: `[Droppable directive]: format is not valid`});
       }
     }
   }

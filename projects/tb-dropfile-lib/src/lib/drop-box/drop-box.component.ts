@@ -201,7 +201,9 @@ export class DropBoxComponent implements OnInit, DoCheck {
    * @param data is provided by the droppable directive
    */
   rejectedFilesChange(data: Array<RejectedFileData>) {
-    this.rejectedFiles.next(data);
+    if (data.length > 0) {
+      this.rejectedFiles.next(data);
+    }
   }
 
   /**
